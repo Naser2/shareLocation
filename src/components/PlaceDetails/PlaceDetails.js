@@ -19,17 +19,21 @@ const PlaceDetails = props => {
           source={props.selectedPlace.image}
           style={styles.placeImageStyle}
         />
-        <Text>{props.selectedPlace.name}</Text>
+        <Text style={styles.placeNameStyle}>{props.selectedPlace.name}</Text>
       </View>
     );
   }
   return (
-    <Modal visible={props.selectedPlace !== null} animationType="slide">
+    <Modal
+      onRequestClose={props.onCloseModal}
+      visible={props.selectedPlace !== null}
+      animationType="slide"
+    >
       <View style={styles.modalContainer}>
         {modalContent}
         <View>
-          <Button title={'delete'} color={'red'} />
-          <Button title={'close'} />
+          <Button title={'delete'} color={'red'} onPress={props.onItemDelete} />
+          <Button title={'close'} onPress={props.onCloseModal} />
         </View>
       </View>
     </Modal>
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
     // paddingTop: 26,
     // justifyContent: 'flex-start',
     // padding: 26
-    margin: 30
+    margin: 22
   },
   page_main_title: {
     marginBottom: 20,
@@ -70,5 +74,11 @@ const styles = StyleSheet.create({
   placeImageStyle: {
     width: '100%',
     height: 200
+  },
+  placeNameStyle: {
+    textAlign: 'center',
+    backgroundColor: '#F5FCFF',
+    fontWeight: 'bold',
+    fontSize: 26
   }
 });
